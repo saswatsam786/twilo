@@ -3,14 +3,15 @@ import { postDataAPI } from "../../utils/fetchData";
 import valid from "../../utils/valid";
 
 export const login = (data) => async (dispatch) => {
+  console.log(data);
   try {
     dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
     const res = await postDataAPI("login", data);
-
+    console.log(res.data.accessToken);
     dispatch({
       type: GLOBALTYPES.AUTH,
       payload: {
-        token: res.data.access_token,
+        token: res.data.accessToken,
         user: res.data.user,
       },
     });
@@ -21,14 +22,15 @@ export const login = (data) => async (dispatch) => {
     dispatch({
       type: GLOBALTYPES.ALERT,
       payload: {
-        success: res.data.msg,
+        success: res.data.message,
       },
     });
   } catch (err) {
+    console.log(err);
     dispatch({
       type: GLOBALTYPES.ALERT,
       payload: {
-        error: err.response.data.msg,
+        error: err.response.data.message,
       },
     });
   }
@@ -40,21 +42,23 @@ export const refreshToken = () => async (dispatch) => {
   if (firstLogin) {
     dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
     try {
-      const res = await postDataAPI("refresh_token");
+      const res = await postDataAPI("refreshToken");
+      console.log(res);
       dispatch({
         type: GLOBALTYPES.AUTH,
         payload: {
-          token: res.data.access_token,
+          token: res.data.accessToken,
           user: res.data.user,
         },
       });
 
       dispatch({ type: GLOBALTYPES.ALERT, payload: {} });
     } catch (err) {
+      console.log(err);
       dispatch({
         type: GLOBALTYPES.ALERT,
         payload: {
-          error: err.response.data.msg,
+          error: err.response.data.message,
         },
       });
     }
@@ -73,14 +77,14 @@ export const register = (data) => async (dispatch) => {
     dispatch({
       type: GLOBALTYPES.AUTH,
       payload: {
-        token: res.data.access_token,
+        token: res.data.accessToken,
         user: res.data.user,
       },
     });
 
     localStorage.setItem("firstLogin", true);
 
-    console.log(res.data.msg);
+    console.log(res.data.message);
     dispatch({
       type: GLOBALTYPES.ALERT,
       payload: {
@@ -91,7 +95,7 @@ export const register = (data) => async (dispatch) => {
     dispatch({
       type: GLOBALTYPES.ALERT,
       payload: {
-        error: err.response.data.msg,
+        error: err.response.data.message,
       },
     });
   }

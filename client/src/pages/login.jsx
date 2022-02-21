@@ -19,12 +19,12 @@ const Login = () => {
   const { auth } = useSelector((state) => state);
 
   useEffect(() => {
+    console.log(auth.token);
     if (auth.token) navigate("/");
   }, [auth, navigate]);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setUserData({ ...userData, [name]: value });
   };
 
