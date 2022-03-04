@@ -80,7 +80,8 @@ exports.login = async (req, res) => {
         .status(400)
         .json({ message: "The user does not exist. Please Sign UP" });
 
-    const compare = bcrypt.compare(password, user.password);
+    const compare = await bcrypt.compare(password, user.password);
+    console.log(compare, 84);
 
     if (!compare)
       return res.status(404).json({ message: "The password is incorrect" });
