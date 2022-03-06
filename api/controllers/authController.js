@@ -46,11 +46,11 @@ exports.signup = async (req, res) => {
     const cookieOptions = {
       httpOnly: true,
 
-      path: "/api/refreshToken",
+      path: "/api/refreshtoken",
       maxAge: 30 * 24 * 60 * 60 * 1000,
     };
 
-    res.cookie("refreshtoken", refreshToken, cookieOptions);
+    res.cookie("refreshToken", refreshToken, cookieOptions);
 
     res.status(201).json({
       message: "Registered",
@@ -81,7 +81,6 @@ exports.login = async (req, res) => {
         .json({ message: "The user does not exist. Please Sign UP" });
 
     const compare = await bcrypt.compare(password, user.password);
-    console.log(compare, 84);
 
     if (!compare)
       return res.status(404).json({ message: "The password is incorrect" });
@@ -91,12 +90,11 @@ exports.login = async (req, res) => {
 
     const cookieOptions = {
       httpOnly: true,
-
-      path: "/api/refreshToken",
+      path: "/api/refreshtoken",
       maxAge: 30 * 24 * 60 * 60 * 1000,
     };
 
-    res.cookie("refreshtoken", refreshToken, cookieOptions);
+    res.cookie("refreshToken", refreshToken, cookieOptions);
 
     res.status(200).json({
       message: "Logged In",
@@ -111,8 +109,8 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    res.clearCookie("refreshtoken", {
-      path: "/api/refreshToken",
+    res.clearCookie("refreshToken", {
+      path: "/api/refreshtoken",
     });
 
     return res.status(200).json({ message: "Logged Out" });
@@ -123,7 +121,7 @@ exports.logout = async (req, res) => {
 
 exports.refreshToken = async (req, res) => {
   try {
-    const refreshToken = req.cookies.refreshtoken;
+    const refreshToken = req.cookies.refreshToken;
 
     console.log(refreshToken, 3);
 
@@ -149,6 +147,7 @@ exports.refreshToken = async (req, res) => {
       }
     );
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ message: err.message });
   }
 };

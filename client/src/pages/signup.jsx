@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../images/Logo.jpeg";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../redux/actions/authAction";
+import { signup } from "../redux/actions/authAction";
 
 const AuthPage = styled.div`
   width: 100%;
@@ -36,7 +36,7 @@ const LinkTo = styled.div`
   margin-bottom: 2px;
 `;
 
-const Register = () => {
+const SignUp = () => {
   const { auth, alert } = useSelector((state) => state);
 
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(register(userData));
+    dispatch(signup(userData));
   };
   return (
     <AuthPage>
@@ -174,10 +174,10 @@ const Register = () => {
               }}
             />
             <Small onClick={() => setTypeCfPass(!typeCfPass)}>
-              {!typePass ? "Show" : "Hide"}
+              {!typeCfPass ? "Show" : "Hide"}
             </Small>
           </Pass>
-          <Form.Text className="text-muted text-danger">
+          <Form.Text className="text-muted">
             {alert.cf_password ? alert.cf_password : ""}
           </Form.Text>
         </Form.Group>
@@ -186,12 +186,12 @@ const Register = () => {
           Sign Up
         </Button>
         <LinkTo>
-          You don't have an account?{" "}
+          Already have an account?{" "}
           <Link
-            to="/register"
+            to="/login"
             style={{ color: "crimson", textDecoration: "none" }}
           >
-            Register Now
+            Login Now
           </Link>
         </LinkTo>
       </Form>
@@ -199,4 +199,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignUp;

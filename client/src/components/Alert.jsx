@@ -8,7 +8,6 @@ import Toast from "./Toast";
 
 const Alert = () => {
   const { alert } = useSelector((state) => state);
-  console.log(alert.error);
   const dispatch = useDispatch();
   return (
     <div>

@@ -38,11 +38,11 @@ export const login = (data) => async (dispatch) => {
 
 export const refreshToken = () => async (dispatch) => {
   const firstLogin = localStorage.getItem("firstLogin");
-
+  console.log(firstLogin);
   if (firstLogin) {
     dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
     try {
-      const res = await postDataAPI("refreshToken");
+      const res = await postDataAPI("refreshtoken");
       console.log(res);
       dispatch({
         type: GLOBALTYPES.AUTH,
@@ -65,7 +65,7 @@ export const refreshToken = () => async (dispatch) => {
   }
 };
 
-export const register = (data) => async (dispatch) => {
+export const signup = (data) => async (dispatch) => {
   const check = valid(data);
   console.log(data);
   console.log(check.errLength);

@@ -85,10 +85,10 @@ const Login = () => {
         <LinkTo>
           You don't have an account?{" "}
           <Link
-            to="/register"
+            to="/signup"
             style={{ color: "crimson", textDecoration: "none" }}
           >
-            Register Now
+            SignUp Now
           </Link>
         </LinkTo>
       </Form>

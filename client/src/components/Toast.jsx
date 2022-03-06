@@ -4,7 +4,6 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 
 const Toast = ({ msg, handleShow }) => {
-  console.log(msg.title);
   return (
     <div>
       <Stack
