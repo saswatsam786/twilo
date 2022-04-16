@@ -187,10 +187,7 @@ const SignUp = () => {
         </Button>
         <LinkTo>
           Already have an account?{" "}
-          <Link
-            to="/login"
-            style={{ color: "crimson", textDecoration: "none" }}
-          >
+          <Link to="/" style={{ color: "crimson", textDecoration: "none" }}>
             Login Now
           </Link>
         </LinkTo>

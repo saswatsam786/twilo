@@ -27,7 +27,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       minLength: 7,
     },
-    avatar: { type: String },
+    avatar: {
+      type: String,
+      default:
+        "https://www.gettyimages.ca/gi-resources/images/500px/983794168.jpg",
+    },
     gender: {
       type: String,
       default: "male",
