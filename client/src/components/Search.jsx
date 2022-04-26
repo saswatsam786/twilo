@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
+import { useSelector, useDispatch } from "react-redux";
+import { getDataAPI } from "../utils/fetchData";
 
 const Search = () => {
   const [search, setSearch] = useState("");
+  const [users, setUsers] = useState([]);
+
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (search && auth.token)
+      getDataAPI("search", auth.token).then((res) => console.log(res));
+  }, [search, auth.token]);
+
   return (
     <Form style={{ position: "relative", margin: "0 auto" }}>
       <Input
