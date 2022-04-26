@@ -1,6 +1,6 @@
 import "./App.css";
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
@@ -23,6 +23,8 @@ function App() {
     dispatch(refreshToken());
   }, [dispatch]);
 
+  const firstLogin = localStorage.getItem("firstLogin");
+
   return (
     <BrowserRouter>
       <Alert />
@@ -34,8 +36,16 @@ function App() {
             <Route exact path="/" element={auth.token ? <Home /> : <Login />} />
             <Route exact path="/signup" element={<SignUp />} />
 
-            <Route exact path="/:page" element={<PageRender />} />
-            <Route exact path="/:page/:id" element={<PageRender />} />
+            <Route
+              exact
+              path="/:page"
+              element={firstLogin ? <PageRender /> : <Navigate to="/" />}
+            />
+            <Route
+              exact
+              path="/:page/:id"
+              element={firstLogin ? <PageRender /> : <Navigate to="/" />}
+            />
           </Routes>
         </div>
       </div>

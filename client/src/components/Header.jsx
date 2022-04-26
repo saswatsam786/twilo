@@ -11,6 +11,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { logout } from "../redux/actions/authAction";
 import { GLOBALTYPES } from "../redux/actions/globalTypes";
 import Avatar from "@mui/material/Avatar";
+import Search from "./Search";
 
 const Header = () => {
   const navLinks = [
@@ -28,90 +29,97 @@ const Header = () => {
   console.log(auth);
 
   return (
-    <Navbar bg="light" expand="lg" style={{ height: "65px" }}>
-      <Container>
-        <Navbar.Brand>
-          <Link to="/">
-            <Logo src={logo} />
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav
-            variant="pills"
-            className="me-auto justify-content-end flex-grow-1 pe-3 align-items-center"
-          >
-            {navLinks.map((link, index) => (
-              <li class="nav-item " key={index}>
-                <Link className="nav-link" to={link.path}>
-                  {link.icon}
-                </Link>
-              </li>
-            ))}
-
-            <NavDropdown
-              title={<Avatar alt={user.user.username} src={user.user.avatar} />}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+    <Head bg="light">
+      <Navbar bg="light" expand="lg" style={{ height: "65px" }}>
+        <Container>
+          <Navbar.Brand>
+            <Link to="/">
+              <Logo src={logo} />
+            </Link>
+          </Navbar.Brand>
+          <Search />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav
+              variant="pills"
+              className="me-auto justify-content-end flex-grow-1 pe-3 align-items-center"
             >
-              <NavDropdown.Item>
-                <Link
-                  to={`/profile/${user.user._id}`}
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  Profile
-                </Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <label
-                  htmlFor="theme"
-                  className="dropdown-item"
-                  onClick={() =>
-                    dispatch({ type: GLOBALTYPES.THEME, payload: !theme })
-                  }
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {theme ? "Light Mode" : "Dark Mode"}
-                </label>
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item>
-                <Link
-                  to="/"
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onClick={() => dispatch(logout())}
-                >
-                  Logout
-                </Link>
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+              {navLinks.map((link, index) => (
+                <li class="nav-item " key={index}>
+                  <Link className="nav-link" to={link.path}>
+                    {link.icon}
+                  </Link>
+                </li>
+              ))}
+
+              <NavDropdown
+                title={
+                  <Avatar alt={user.user.username} src={user.user.avatar} />
+                }
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <NavDropdown.Item>
+                  <Link
+                    to={`/profile/${user.user._id}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    Profile
+                  </Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <label
+                    htmlFor="theme"
+                    className="dropdown-item"
+                    onClick={() =>
+                      dispatch({ type: GLOBALTYPES.THEME, payload: !theme })
+                    }
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {theme ? "Light Mode" : "Dark Mode"}
+                  </label>
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item>
+                  <Link
+                    to="/"
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onClick={() => dispatch(logout())}
+                  >
+                    Logout
+                  </Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </Head>
   );
 };
+
+const Head = styled.div``;
 
 const Logo = styled.img`
   object-fit: contain;
