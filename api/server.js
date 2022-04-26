@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", require("./routes/authRouter"));
+app.use("/api", require("./routes/userRouter"));
 
 const DB = process.env.DB_URL.replace(`<password>`, process.env.DB_PASSWORD);
 
